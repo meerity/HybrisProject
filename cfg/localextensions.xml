@@ -4,5 +4,12 @@
 		<path dir="${HYBRIS_BIN_DIR}" />
 		<extension name="platformbackoffice" />
 		<extension name="trainingextension" />
+		<extension name="trainingbackoffice" />
+        <extension name="trainingfulfilmentprocess" />
+        <extension name="trainingcore" />
+        <extension name="traininginitialdata" />
+        <extension name="trainingfacades" />
+        <extension name="trainingtest" />
+        <extension name="trainingstorefront" />
 	</extensions>
 </hybrisconfig>
