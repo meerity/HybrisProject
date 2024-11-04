@@ -1,40 +1,76 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--
- Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
--->
-<!--
-	ATTENTION: This is just an example file. You have to edit it according to your needs.
--->
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<!--Third task-->
+	<collectiontypes>
+		<collectiontype code="FavouriteProductsList" elementtype="Product" type="list"/>
+	</collectiontypes>
+
+	<relations>
+		<!--First task -->
+		<relation code="RecipeToIngredient" localized="false">
+			<deployment table="Recipe_Ingredient" typecode="11002"/>
+			<sourceElement type="Recipe" qualifier="recipes" collectiontype="set" cardinality="many"/>
+			<targetElement type="Ingredient" qualifier="ingredients" cardinality="many"/>
+		</relation>
+
+		<!--Third task-->
+		<relation code="UserFavouriteProducts" localized="false">
+			<deployment table="User_ProductFav" typecode="11004"/>
+			<sourceElement type="User" qualifier="user" cardinality="many" collectiontype="set"/>
+			<targetElement type="Product" qualifier="product" cardinality="many"/>
+		</relation>
+		
+	</relations>
+
 	<itemtypes>
-<!--
-		<itemtype generate="true"
-		   code="MyProduct"
-		   jaloclass="com.epam.training.jalo.MyProduct"
-		   extends="Product"
-		   autocreate="true"
-	   >
+		<!--First task -->
+		<itemtype code="Recipe" extends="GenericItem">
+			<deployment table="Recipes" typecode="11000"/>
 			<attributes>
-				<attribute qualifier="myExampleInitialStringField" type="java.lang.String">
-					<description>My Example Initial String Value</description>
-					<modifiers initial="true"/>
+				<attribute qualifier="instructions" type="java.lang.String">
 					<persistence type="property"/>
 				</attribute>
-
-				<attribute qualifier="myExampleBooleanField" type="java.lang.Boolean">
-					<description>Example Initial Boolean Field</description>
-               <persistence type="property"/>
-				</attribute>
-
-				<attribute qualifier="media" type="Media">
-					<persistence type="property"/>
-				</attribute>
-
 			</attributes>
 		</itemtype>
--->
+		
+		<itemtype code="Ingredient" extends="GenericItem">
+			<deployment table="Ingredients" typecode="11001"/>
+			<attributes>
+				<attribute qualifier="quantity" type="java.lang.Integer">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Second task -->
+		<itemtype code="LoyaltyCard">
+			<deployment table="LoyaltyCards" typecode="11003"/>
+			<attributes>
+				<attribute qualifier="cardNumber" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="points" type="java.lang.Long">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="User" autocreate="false">
+			<deployment table="User" typecode="11005"/>
+			<attributes>
+				<!-- Second task -->
+				<attribute qualifier="loyaltyCard" type="LoyaltyCard">
+					<persistence type="property"/>
+				</attribute>
+
+				<!--Third task -->
+				<attribute qualifier="favProducts" type="FavouriteProductsList">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
 	</itemtypes>
 </items>
