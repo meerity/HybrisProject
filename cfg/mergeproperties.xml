@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mergeproperties" default="merge" basedir=".">
+    <property name="local.properties" value="${basedir}/../../config/local.properties"/>
+ 
+    <property name="env" value="defaultEnv"/>
+ 
+    <target name="merge">
+        <echo message="Merging environment properties into local.properties for environment: ${env}"/>
+ 
+        <property name="env.properties" value="C:/Users/user/Hybris/hybris/config/environments/${env}.properties"/>
+ 
+        <echo message="Looking for environment properties file at: ${env.properties}"/>
+ 
+        <loadfile property="env.properties.content" srcFile="${env.properties}"/>
+ 
+        <echo message="Merging properties from ${env.properties} into ${local.properties}" />
+ 
+        <echo file="${local.properties}" append="false">${env.properties.content}</echo>
+ 
+    </target>
+</project>
+ 
+
+ 
+ 
