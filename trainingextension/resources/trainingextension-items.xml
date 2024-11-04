@@ -2,11 +2,20 @@
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
-
+	
 	<!--Third task-->
 	<collectiontypes>
 		<collectiontype code="FavouriteProductsList" elementtype="Product" type="list"/>
 	</collectiontypes>
+
+	<!--Forth task-->
+	<enumtypes>
+		<enumtype code="UserStatuses">
+			<value code="ACTIVE"/>
+			<value code="DISABLED"/>
+			<value code="DELETED"/>
+		</enumtype>
+	</enumtypes>
 
 	<relations>
 		<!--First task -->
@@ -68,6 +77,57 @@
 
 				<!--Third task -->
 				<attribute qualifier="favProducts" type="FavouriteProductsList">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Forth task-->
+		<itemtype code="SpecificUser" extends="User">
+			<attributes>
+				<attribute qualifier="status" type="UserStatuses">
+					<modifiers optional="false"/>
+					<persistence type="property"/>
+					<defaultvalue>em().getEnumerationValue("userStatuses", "ACTIVE")</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Fifth task-->
+		<itemtype code="Engine" extends="GenericItem">
+			<deployment table="Engines" typecode="11006"/>
+			<attributes>
+				<attribute qualifier="serialNumber" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Fifth task-->
+		<itemtype code="Car" extends="GenericItem">
+			<deployment table="Cars" typecode="11007"/>
+			<attributes>
+				<attribute qualifier="engine" type="Engine">
+					<persistence type="property"/>
+					<modifiers partof="true"/>
+				</attribute>
+				<attribute qualifier="model" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<!--Sixth task-->
+		<itemtype code="Rating" extends="GenericItem">
+			<deployment table="Ratings" typecode="11008"/>
+			<attributes>
+				<attribute qualifier="score" type="java.lang.Integer">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="user" type="User">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="product" type="Product">
 					<persistence type="property"/>
 				</attribute>
 			</attributes>
