@@ -6,6 +6,7 @@
 	<!--Third task-->
 	<collectiontypes>
 		<collectiontype code="FavouriteProductsList" elementtype="Product" type="list"/>
+		<collectiontype code="ProductSet" elementtype="Product" type="set"/>
 	</collectiontypes>
 
 	<!--Forth task-->
@@ -36,7 +37,7 @@
 
 	<itemtypes>
 		<!--First task -->
-		<itemtype code="Recipe" extends="GenericItem">
+		<itemtype code="Recipe">
 			<deployment table="Recipes" typecode="11000"/>
 			<attributes>
 				<attribute qualifier="instructions" type="java.lang.String">
@@ -45,7 +46,7 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="Ingredient" extends="GenericItem">
+		<itemtype code="Ingredient">
 			<deployment table="Ingredients" typecode="11001"/>
 			<attributes>
 				<attribute qualifier="quantity" type="java.lang.Integer">
@@ -94,7 +95,7 @@
 		</itemtype>
 
 		<!--Fifth task-->
-		<itemtype code="Engine" extends="GenericItem">
+		<itemtype code="Engine">
 			<deployment table="Engines" typecode="11006"/>
 			<attributes>
 				<attribute qualifier="serialNumber" type="java.lang.String">
@@ -104,7 +105,7 @@
 		</itemtype>
 
 		<!--Fifth task-->
-		<itemtype code="Car" extends="GenericItem">
+		<itemtype code="Car">
 			<deployment table="Cars" typecode="11007"/>
 			<attributes>
 				<attribute qualifier="engine" type="Engine">
@@ -118,7 +119,7 @@
 		</itemtype>
 		
 		<!--Sixth task-->
-		<itemtype code="Rating" extends="GenericItem">
+		<itemtype code="Rating">
 			<deployment table="Ratings" typecode="11008"/>
 			<attributes>
 				<attribute qualifier="score" type="java.lang.Integer">
@@ -128,6 +129,44 @@
 					<persistence type="property"/>
 				</attribute>
 				<attribute qualifier="product" type="Product">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Seventh task-->
+		<itemtype code="ProductSubtype" extends="Product">
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String" redeclare="true">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Eighth task-->
+		<itemtype code="Turtle">
+			<deployment table="Turtles" typecode="11009"/>
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="location" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="NameAndLocationKey" unique="true">
+					<key attribute="name"/>
+					<key attribute="location"/>
+				</index>
+			</indexes>
+		</itemtype>
+
+		<!--Ninth task-->
+		<itemtype code="ProductBundle" extends="Product">
+			<attributes>
+				<attribute qualifier="products" type="ProductSet">
 					<persistence type="property"/>
 				</attribute>
 			</attributes>
