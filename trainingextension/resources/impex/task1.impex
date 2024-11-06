@@ -1,0 +1,23 @@
+$catalogVersion=catalogVersion(catalog(id[default=Default]),version[default=Staged])
+
+INSERT_UPDATE Product;code[unique=true];$catalogVersion
+
+"#%groovy%
+import de.hybris.platform.core.model.product.ProductModel
+import de.hybris.platform.servicelayer.search.FlexibleSearchService
+import de.hybris.platform.servicelayer.model.ModelService
+
+def flexibleSearchService = spring.getBean('flexibleSearchService')
+def modelService = spring.getBean('modelService')
+
+def query = 'SELECT {pk} FROM {Product}'
+def products = flexibleSearchService.search(query).getResult()
+
+for (product in products) {
+    product.setName(product.getCode(), new Locale('en'))
+    product.setDescription(product.getCode(), new Locale('en'))
+    modelService.save(product)
+}
+
+'Products updated'";
+;test;Default:Staged

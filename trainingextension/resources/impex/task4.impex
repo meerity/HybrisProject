@@ -1,0 +1,4 @@
+$catalogVersion=catalogVersion(catalog(id[default=Default]),version[default=Staged])
+
+INSERT_UPDATE Product;code[unique=true, cellDecorator=com.epam.training.decorators.ProductCodeDecorator];$catalogVersion
+;Test product;Default:Staged

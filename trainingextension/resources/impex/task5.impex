@@ -1,0 +1,5 @@
+#% impex.setTargetFile("products_online_not_in_staged.csv");
+
+INSERT_UPDATE Product;code[unique=true];catalogVersion(catalog(id),version)[unique=true];name[lang=en]
+
+#% impex.exportItemsFlexibleSearch("SELECT {p:PK} FROM {Product AS p JOIN CatalogVersion AS cv ON {p:catalogVersion}={cv:PK}} WHERE {cv:version} = 'Online' AND {cv:catalog} IN ({{SELECT {pk} FROM {Catalog} WHERE {id} = 'productCatalog'}}) AND NOT EXISTS ({{SELECT 1 FROM {Product AS p2 JOIN CatalogVersion AS cv2 ON {p2:catalogVersion}={cv2:PK}} WHERE {p2:code} = {p:code} AND {cv2:version} = 'Staged' AND {cv2:catalog} = {cv:catalog}}}) ORDER BY {p:code}");
