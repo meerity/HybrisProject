@@ -1,0 +1,50 @@
+{
+    "init": "Go",
+    "initmethod": "update",
+    "localizetypes": "true",
+    "trainingextension_sample": "true",
+    "basecommerce_create geocoding cron job": [
+      "no"
+    ],
+    "trainingcore_accessRights": [
+      "yes"
+    ],
+    "traininginitialdata_importCoreData": [
+      "yes"
+    ],
+    "traininginitialdata_importSampleData": [
+      "yes"
+    ],
+    "traininginitialdata_activateSolrCronJobs": [
+      "yes"
+    ],
+    "apparelstore_importCoreData": [
+      "yes"
+    ],
+    "apparelstore_importSampleData": [
+      "yes"
+    ],
+    "apparelstore_activateSolrCronJobs": [
+      "yes"
+    ],
+    "electronicsstore_importCoreData": [
+      "yes"
+    ],
+    "electronicsstore_importSampleData": [
+      "yes"
+    ],
+    "electronicsstore_activateSolrCronJobs": [
+      "yes"
+    ],
+    "trainingtest_createTestData": [
+      "yes"
+    ],
+    "patch_catalog": [
+      "2c64b0e08512b6a61d60f70e944b23aa",
+      "e48574bec5fc1727cfeda4fa50d08143"
+    ],
+    "patch_validation": [
+      "ba04041624e635f97ebd48c2d9fbdf26"
+    ],
+    "filteredPatches": "true"
+  }
