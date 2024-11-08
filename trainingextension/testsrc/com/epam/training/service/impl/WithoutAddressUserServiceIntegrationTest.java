@@ -16,7 +16,7 @@ import java.util.List;
 public class WithoutAddressUserServiceIntegrationTest extends ServicelayerTest {
 
     @Resource
-    private WithoutAddressUserService service;
+    private WithoutAddressUserService userWithoutAddressService;
 
     @Resource
     private ModelService modelService;
@@ -38,7 +38,7 @@ public class WithoutAddressUserServiceIntegrationTest extends ServicelayerTest {
         modelService.saveAll(user1, user2, address);
 
         // When
-        List<UserWithoutAddressModel> result = service.getUsersWithoutAddress();
+        List<UserWithoutAddressModel> result = userWithoutAddressService.getUsersWithoutAddress();
 
         // Then
         Assert.assertEquals(1, result.size());

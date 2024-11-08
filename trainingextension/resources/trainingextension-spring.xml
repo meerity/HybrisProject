@@ -8,6 +8,8 @@
     <bean id="userWithoutAddressService" class="com.epam.training.service.impl.WithoutAddressUserService" parent="defaultUserService">
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
+
+    <bean id="impexImportService" class="com.epam.training.service.impl.ImpexImportService"/>
 	
     <bean id="trainingextensionSystemSetup" class="com.epam.training.setup.TrainingextensionSystemSetup">
         <constructor-arg ref="trainingextensionService"/>
