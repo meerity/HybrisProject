@@ -1,13 +1,13 @@
-SELECT COUNT({c:pk})
+SELECT COUNT({c.pk})
 FROM {Customer AS c}
 WHERE NOT EXISTS ({{
-                    SELECT {com:pk}
+                    SELECT {com.pk}
                     FROM {Comment AS com}
-                    WHERE {com:author} = {c:pk}
+                    WHERE {com.author} = {c.pk}
                   }})
-      OR {c:pk} IN ({{
-                      SELECT {c2:pk}
-                      FROM {Customer AS c2 JOIN Comment AS com ON {com:author} = {c2:pk} }
-                                                                                 GROUP BY {c2:pk}
-                      HAVING MAX({com:creationtime}) < NOW() - INTERVAL '1 year'
+      OR {c.pk} IN ({{
+                      SELECT {c2.pk}
+                      FROM {Customer AS c2 JOIN Comment AS com ON {com.author} = {c2.pk} }
+                                                                                 GROUP BY {c2.pk}
+                      HAVING MAX({com.creationtime}) < NOW() - INTERVAL '1 year'
                     }})
