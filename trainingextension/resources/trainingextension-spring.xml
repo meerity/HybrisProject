@@ -20,5 +20,28 @@
         <property name="mediaService" ref="mediaService"/>
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
+
+    <!--Facade task-->
+    <bean id="weatherForecastPopulator" class="com.epam.training.populators.WeatherForecastPopulator"/>
+
+    <bean id="weatherForecastConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.epam.training.data.WeatherForecastData"/>
+        <property name="populators">
+            <list>
+                <ref bean="weatherForecastPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="defaultWeatherForecastService" class="com.epam.training.service.impl.DefaultWeatherForecastService">
+        <property name="flexibleSearchService" ref="defaultFlexibleSearchService"/>
+    </bean>
+    <alias name="defaultWeatherForecastService" alias="forecastService"/>
+
+    <bean id="defaultWeatherForecastFacade" class="com.epam.training.facade.impl.DefaultWeatherForecastFacade">
+        <property name="weatherForecastService" ref="defaultWeatherForecastService"/>
+        <property name="weatherForecastConverter" ref="weatherForecastConverter"/>
+    </bean>
+    <alias name="defaultWeatherForecastFacade" alias="forecastFacade"/>
 			
 </beans>

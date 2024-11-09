@@ -9,13 +9,23 @@
 		<collectiontype code="ProductSet" elementtype="Product" type="set"/>
 	</collectiontypes>
 
-	<!--Forth task-->
+
 	<enumtypes>
+		<!--Forth task-->
 		<enumtype code="UserStatuses">
 			<value code="ACTIVE"/>
 			<value code="DISABLED"/>
 			<value code="DELETED"/>
 		</enumtype>
+
+		<!--Facade: Sixth task-->
+		<enumtype code="WeatherStatuses">
+			<value code="SUNNY"/>
+			<value code="CLOUDY"/>
+			<value code="RAIN"/>
+			<value code="SNOW"/>
+		</enumtype>
+
 	</enumtypes>
 
 	<relations>
@@ -171,5 +181,28 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+
+		<!--Facade: Sixth task-->
+		<itemtype code="WeatherForecast">
+			<deployment table="Weather-forecasts" typecode="11010"/>
+			<attributes>
+				<attribute qualifier="city" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="temperature" type="java.lang.Integer">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="status" type="WeatherStatuses">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="precipitation" type="java.lang.Integer">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="forecastDate" type="java.util.Date">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
 	</itemtypes>
 </items>

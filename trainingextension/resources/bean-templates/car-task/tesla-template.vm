@@ -1,0 +1,18 @@
+/*
+* ----------------------------------------------------------------
+* --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN!
+* --- Generated at $currentDateTime
+* ----------------------------------------------------------------
+*/
+package $packageName;
+
+import com.epam.training.data.enums.EngineType;
+
+public class $shortClassName extends AbstractCar
+{
+    @Override
+    public EngineType getEngine()
+    {
+        return super.getEngine() != null ? super.getEngine() : EngineType.ELECTRIC;
+    }
+}
