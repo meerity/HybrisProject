@@ -3,10 +3,12 @@ package com.epam.training.service.impl;
 import com.epam.training.model.UserWithoutAddressModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.impl.DefaultUserService;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class WithoutAddressUserService extends DefaultUserService {
@@ -22,9 +24,12 @@ public class WithoutAddressUserService extends DefaultUserService {
                 "FROM {" + AddressModel._TYPECODE + " AS a} " +
                 "WHERE {a:" + AddressModel.OWNER + "} = {u:" + UserModel.PK + "}}})";
 
-        SearchResult<Object[]> result = flexibleSearchService.search(query);
+        FlexibleSearchQuery searchQuery = new FlexibleSearchQuery(query);
+        searchQuery.setResultClassList(Arrays.asList(String.class, String.class));
+
+        SearchResult<List<String>> result = flexibleSearchService.search(searchQuery);
         return result.getResult().stream()
-                .map(row -> new UserWithoutAddressModel((String) row[0], (String) row[1]))
+                .map(list -> new UserWithoutAddressModel(list.get(0), list.get(1)))
                 .toList();
     }
 
