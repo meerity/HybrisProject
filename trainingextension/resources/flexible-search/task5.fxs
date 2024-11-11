@@ -1,0 +1,14 @@
+SELECT
+--Attribute name is already a concatenation of firstname and lastname in needed format
+      {c:name},
+      ({{
+         SELECT COUNT({reply:pk})
+         FROM {Comment AS reply}
+         WHERE {reply:component} IN
+               ({{
+                  SELECT {com:pk}
+                  FROM {Comment AS com}
+                  WHERE {com:author} = {c:pk}
+                }})
+       }})
+FROM {Customer AS c}

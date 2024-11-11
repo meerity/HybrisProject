@@ -1,0 +1,10 @@
+SELECT {p:pk}
+FROM {Product! AS p
+      JOIN CatalogVersion AS cv ON {p:catalogVersion} = {cv:pk} }
+            WHERE {cv:version} = 'Online'
+                  AND {cv:catalog} IN ({{
+                                         SELECT {c:pk}
+                                         FROM {Catalog AS c}
+                                         WHERE {c:id} = 'productCatalog'
+                                       }})
+                  AND {p:code} LIKE '%a%'

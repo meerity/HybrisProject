@@ -1,0 +1,3 @@
+SELECT {u:pk}
+FROM {User! AS u}
+    WHERE {u:name} LIKE 'Iv%'

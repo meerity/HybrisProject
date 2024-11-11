@@ -1,0 +1,4 @@
+SELECT {a:pk}
+FROM {Address AS a
+      JOIN Customer AS c ON {a:owner} = {c:pk} }
+            WHERE {a:town} = 'London'

@@ -1,0 +1,7 @@
+"#% impex.setLocale( Locale.ENGLISH );"
+
+"#% impex.setTargetFile( ""products_with_meat.csv"", true, 0, -1 );"
+
+INSERT_UPDATE Product; code[unique=true]; catalogVersion(catalog(id),version)[unique=true]; description[lang=en]
+
+"#% impex.exportItemsFlexibleSearch('SELECT {p:pk} FROM {Product AS p JOIN CatalogVersion AS cv ON {p:catalogVersion} = {cv:pk} JOIN Catalog AS cat ON {cv:catalog} = {cat:pk}} WHERE {p:description} LIKE ''%meat%'' ORDER BY {p:pk}');"
