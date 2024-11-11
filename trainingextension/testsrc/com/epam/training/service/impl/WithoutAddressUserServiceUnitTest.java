@@ -1,6 +1,6 @@
 package com.epam.training.service.impl;
 
-import com.epam.training.model.UserWithoutAddressModel;
+import com.epam.training.data.UserWithoutAddressData;
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -41,7 +41,7 @@ public class WithoutAddressUserServiceUnitTest {
         when(mockResult.getResult()).thenReturn(resultList);
 
         // When
-        List<UserWithoutAddressModel> result = withoutAddressUserService.getUsersWithoutAddress();
+        List<UserWithoutAddressData> result = withoutAddressUserService.getUsersWithoutAddress();
 
         // Then
         Assert.assertEquals(1, result.size());

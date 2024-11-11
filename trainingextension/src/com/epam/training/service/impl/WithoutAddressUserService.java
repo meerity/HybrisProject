@@ -1,6 +1,6 @@
 package com.epam.training.service.impl;
 
-import com.epam.training.model.UserWithoutAddressModel;
+import com.epam.training.data.UserWithoutAddressData;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -15,7 +15,7 @@ public class WithoutAddressUserService extends DefaultUserService {
 
     private FlexibleSearchService flexibleSearchService;
 
-    public List<UserWithoutAddressModel> getUsersWithoutAddress() {
+    public List<UserWithoutAddressData> getUsersWithoutAddress() {
         final String query = "SELECT {u:" + UserModel.PK + "}, " +
                 "{u:" + UserModel.NAME + "} " +
                 "FROM {" + UserModel._TYPECODE + " AS u} " +
@@ -29,7 +29,7 @@ public class WithoutAddressUserService extends DefaultUserService {
 
         SearchResult<List<String>> result = flexibleSearchService.search(searchQuery);
         return result.getResult().stream()
-                .map(list -> new UserWithoutAddressModel(list.get(0), list.get(1)))
+                .map(list -> new UserWithoutAddressData(list.get(0), list.get(1)))
                 .toList();
     }
 

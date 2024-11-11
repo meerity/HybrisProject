@@ -1,14 +1,14 @@
-package com.epam.training.model;
+package com.epam.training.data;
 
-public class UserWithoutAddressModel {
+public class UserWithoutAddressData {
 
     String uid;
     String name;
 
-    public UserWithoutAddressModel() {
+    public UserWithoutAddressData() {
     }
 
-    public UserWithoutAddressModel(String uid, String name) {
+    public UserWithoutAddressData(String uid, String name) {
         this.uid = uid;
         this.name = name;
     }
