@@ -1,0 +1,71 @@
+/*
+* ----------------------------------------------------------------
+* --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN!
+* --- Generated at $currentDateTime
+* ----------------------------------------------------------------
+*
+* Copyright (c) $currentYear SAP SE or an SAP affiliate company. All rights reserved.
+*/
+package $packageName;
+
+#if( ! $superclassName)
+import java.io.Serializable;
+#end
+#foreach($i in $imports)
+import $i;
+#end
+
+public #if ($isAbstract)abstract #end class $shortClassName #if($superclassName)extends $superclassName #else implements Serializable #end
+{
+#if( ! $superclassName)
+    private static final long serialVersionUID = 1L;
+#end
+
+#foreach($v in $memberVariables)
+    private $v.type $v.name;
+#end
+
+    protected ${shortClassName}(${shortClassName}Builder builder)
+    {
+#foreach($v in $memberVariables)
+    this.$v.name = builder.$v.name;
+#end
+    }
+
+    public static ${shortClassName}Builder builder()
+    {
+        return new ${shortClassName}Builder();
+    }
+
+#foreach($v in $memberVariables)
+    public $v.type get${StringUtils.capitalize($v.name)}()
+    {
+        return $v.name;
+    }
+#end
+
+    public static class ${shortClassName}Builder
+    {
+        #foreach($v in $memberVariables)
+        private $v.type $v.name;
+        #end
+
+        private ${shortClassName}Builder()
+        {
+            // default constructor
+        }
+
+        #foreach($v in $memberVariables)
+        public ${shortClassName}Builder ${v.name}(final $v.type ${v.name})
+        {
+            this.$v.name = ${v.name};
+            return this;
+        }
+        #end
+
+        public $shortClassName build()
+        {
+            return new ${shortClassName}(this);
+        }
+    }
+}

@@ -1,62 +1,70 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--
- Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
--->
-<!--
-	ATTENTION: This is just an example file. You have to edit it according to your needs.
--->
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
-	<!--
-		Example Data POJO
+	<!--Second task-->
+	<enum class="com.epam.training.data.enums.ProductSimpleEnum"
+		  template="resources/bean-templates/custom-enumtemplate.vm">
+		<value>COMPLETED</value>
+		<value>Delivered</value>
+		<value>ordered</value>
+	</enum>
+
+	<!--Fifth task-->
+	<enum class="com.epam.training.data.enums.EngineType">
+		<value>Electric</value>
+		<value>Gas</value>
+		<value>Diesel</value>
+	</enum>
+
+	<!--First task-->
+	<bean class="com.epam.training.data.ProductSimpleData"
+	template="resources/bean-templates/objectmethods-beantemplate.vm">
+		<property name="code" type="String"/>
+		<property name="name" type="String" equals="true"/>
+		<property name="capacity" type="Integer"/>
+	</bean>
 	
-	<bean class="com.epam.training.data.AbstractPojo" abstract="true">
-		<property name="id" type="String"/>
-		<property name="flag" type="boolean"/>
+	<!--Third task-->
+	<bean class="com.epam.training.data.ProductDataParametrizedConstructor"
+		template="resources/bean-templates/parametrizedconstruct-beantemplate.vm">
+		<property name="code" type="String"/>
+		<property name="name" type="String" equals="true"/>
+		<property name="capacity" type="Integer"/>
 	</bean>
 
-	<bean class="com.epam.training.data.MyPojo" extends="com.epam.training.data.AbstractPojo">
-		<property name="message" type="String"/>
+	<!--Forth task-->
+	<bean class="com.epam.training.data.ProductBuilderData"
+		  template="resources/bean-templates/bean-builder-template.vm">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="capacity" type="Integer"/>
+	</bean>
+	
+	<!--Fifth task-->
+	<bean class="com.epam.training.data.AbstractCar"
+		  template="resources/bean-templates/car-task/abstractcar-template.vm"
+		  abstract="true">
+		<property name="brand" type="String"/>
+		<property name="engine" type="com.epam.training.data.enums.EngineType"/>
+		<property name="model" type="String"/>
 	</bean>
 
-	<bean class="com.epam.training.data.AnnotatedPojo">
+	<bean class="com.epam.training.data.Mazda"
+		  template="resources/bean-templates/car-task/mazda-template.vm"
+		  extends="com.epam.training.data.AbstractCar"/>
 
-		<import type="javax.xml.bind.annotation.XmlRootElement"/>
-		<import type="javax.xml.bind.annotation.XmlElements"/>
-		<import type="javax.xml.bind.annotation.XmlElement"/>
-
-		<annotations>@XmlRootElement</annotations>
-		
-		<property name="someText" type="String">
-
-			<annotations scope="getter">
-			@XmlElements(value = {
-					@XmlElement(name="map",
-						type=ValueAsMap.class),
-					@XmlElement(name="string",
-						type=ValueAsString.class)
-			})
-			</annotations>
-
-		</property>
-
+	<bean class="com.epam.training.data.Tesla"
+		  template="resources/bean-templates/car-task/tesla-template.vm"
+		  extends="com.epam.training.data.AbstractCar"/>
+	
+	<!--Sixth task-->
+	<bean class="com.epam.training.data.WeatherForecastData">
+		<property name="city" type="String"/>
+		<property name="temperature" type="Integer"/>
+		<property name="status" type="String"/>
+		<property name="precipitation" type="Integer"/>
+		<property name="forecastDate" type="java.util.Date"/>
 	</bean>
-
-    <bean  class="de.hybris.platform.catalog.data.Equals1">
-    	<property name="a1" type="boolean" equals="true"/>
-    	<property name="a2" type="int" equals="true"/>
-    	<property name="a3" type="String" equals="true"/>
-    	<property name="a4" type="de.hybris.platform.catalog.data.AbstractValue" equals="true"/>
-    	<property name="not4Equals" type="java.lang.Double"/>
-    </bean>
-
-    <bean class="de.hybris.platform.catalog.data.Equals2" extends="de.hybris.platform.catalog.data.Equals1" superEquals="true">
-    	<property name="a5" type="java.lang.Integer" equals="true"/>
-    	<property name="a6" type="java.util.List" equals="true"/>
-    	<property name="not4Equals" type="java.lang.Double"/>
-    </bean>
-
-	-->
 
 </beans>

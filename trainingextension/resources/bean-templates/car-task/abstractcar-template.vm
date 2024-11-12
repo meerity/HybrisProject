@@ -1,0 +1,46 @@
+/*
+* ----------------------------------------------------------------
+* --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN!
+* --- Generated at $currentDateTime
+* ----------------------------------------------------------------
+*/
+package $packageName;
+
+import com.epam.training.data.enums.EngineType;
+
+public abstract class $shortClassName
+{
+    private final String brand;
+    private EngineType engine;
+    private String model;
+
+    protected ${shortClassName}()
+    {
+        this.brand = this.getClass().getSimpleName();
+    }
+
+    public String getBrand()
+    {
+        return brand;
+    }
+
+    public EngineType getEngine()
+    {
+        return engine;
+    }
+
+    public void setEngine(final EngineType engine)
+    {
+        this.engine = engine;
+    }
+
+    public String getModel()
+    {
+        return model;
+    }
+
+    public void setModel(final String model)
+    {
+        this.model = model;
+    }
+}
