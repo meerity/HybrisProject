@@ -1,0 +1,4 @@
+INSERT_UPDATE Language; isocode[unique = true]; active[default = true]
+                      ; en; true
+
+

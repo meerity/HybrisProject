@@ -1,7 +1,6 @@
 package com.epam.training.decorators;
 
 import de.hybris.platform.impex.jalo.header.AbstractImpExCSVCellDecorator;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
