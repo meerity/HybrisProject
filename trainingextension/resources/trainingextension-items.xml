@@ -179,12 +179,17 @@
 				<attribute qualifier="products" type="ProductSet">
 					<persistence type="property"/>
 				</attribute>
+				<!--Dynamic Attribute Task-->
+				<attribute qualifier="productPriceSum" type="java.lang.Double">
+					<persistence type="dynamic" attributeHandler="productPriceSumAttributeHandler"/>
+					<modifiers read="true" write="false"/>
+				</attribute>
 			</attributes>
 		</itemtype>
 
 		<!--Facade: Sixth task-->
 		<itemtype code="WeatherForecast">
-			<deployment table="Weather-forecasts" typecode="11010"/>
+			<deployment table="WeatherForecasts" typecode="11010"/>
 			<attributes>
 				<attribute qualifier="city" type="java.lang.String">
 					<persistence type="property"/>
