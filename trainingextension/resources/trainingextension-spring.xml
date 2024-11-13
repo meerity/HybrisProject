@@ -46,5 +46,25 @@
 
     <!--Dynamic Attribute task-->
     <bean id="productPriceSumAttributeHandler" class="com.epam.training.handlers.ProductPriceSumAttributeHandler"/>
+
+    <!--Events and Interceptors task 1-->
+    <bean id="productRatingValidateInterceptor" class="com.epam.training.interceptors.ProductRatingValidateInterceptor"/>
+
+    <!--Events and Interceptors task 1-->
+    <bean id="productCouponsRemoveInterceptor" class="com.epam.training.interceptors.ProductCouponsRemoveInterceptor">
+        <property name="modelService" ref="defaultModelService"/>
+    </bean>
+
+    <bean id="ProductInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <!--Events and Interceptors task 1-->
+        <property name="interceptor" ref="productRatingValidateInterceptor"/>
+        <property name="typeCode" value="Product"/>
+    </bean>
+
+    <!--Events and Interceptors task 2-->
+    <bean id="ProductCouponsRemoveInterceptor" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="productCouponsRemoveInterceptor"/>
+        <property name="typeCode" value="Product"/>
+    </bean>
 			
 </beans>
