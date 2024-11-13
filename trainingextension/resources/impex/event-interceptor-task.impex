@@ -1,0 +1,24 @@
+# ProductRemoveInterceptor purpose:
+# - Prevents removal of products that are referenced in orders
+# - Maintains data integrity between products and order entries
+# - Ensures order history remains valid
+# - Protects against orphaned order entries
+
+# Consequences of disabling:
+# - Products can be removed even if they are used in orders
+# - Order entries may reference non-existent products
+# - Order history may become incomplete or invalid
+# - Potential issues with order-related reports and analytics
+# - May cause problems in backoffice when viewing orders with removed products
+# - Can affect order export/import processes
+# - May break functionality that relies on product existence in orders
+
+# Disable interceptor for current session only (not globally)
+#% impex.setSessionAttribute( DISABLED_INTERCEPTOR_BEANS, "productRemoveInterceptor" );
+
+# Perform removal operations
+REMOVE Product;code[unique=true]
+              ;test
+
+# Re-enable interceptor for current session
+#% impex.removeSessionAttribute( DISABLED_INTERCEPTOR_BEANS );

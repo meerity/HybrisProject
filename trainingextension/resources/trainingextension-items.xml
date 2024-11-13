@@ -42,6 +42,17 @@
 			<sourceElement type="User" qualifier="user" cardinality="many" collectiontype="set"/>
 			<targetElement type="Product" qualifier="product" cardinality="many"/>
 		</relation>
+
+		<!--Events and Interceptors task 2-->
+
+		<relation code="ProductAndCoupons" localized="false">
+			<sourceElement type="Product" qualifier="product" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement type="Coupon" qualifier="coupons" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</targetElement>
+		</relation>
 		
 	</relations>
 
@@ -204,6 +215,27 @@
 					<persistence type="property"/>
 				</attribute>
 				<attribute qualifier="forecastDate" type="java.util.Date">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Events and Interceptors task 1-->
+		<itemtype code="Product" autocreate="false">
+			<deployment table="Product" typecode="11011"/>
+			<attributes>
+				<attribute qualifier="rating" type="java.lang.Integer">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Events and Interceptors task 2-->
+		<itemtype code="Coupon">
+			<deployment table="Coupons" typecode="11012"/>
+			<attributes>
+				<attribute qualifier="info" type="java.lang.String">
 					<persistence type="property"/>
 				</attribute>
 			</attributes>
