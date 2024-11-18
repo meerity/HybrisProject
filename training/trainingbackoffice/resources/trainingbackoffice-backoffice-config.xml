@@ -3,7 +3,32 @@
  Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 -->
 <config xmlns="http://www.hybris.com/cockpit/config"
-	xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+	xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="library">
+				<n:type-node id="authors" code="Author"/>
+				<n:type-node id="books" code="Book"/>
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context component="editor-area">
+		<context type="Author">
+			<editorArea:basic-search xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+				<editorArea:search-property qualifier="name"/>
+			</editorArea:basic-search>
+		</context>
+
+		<context type="Book">
+			<editorArea:basic-search xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+				<editorArea:search-property qualifier="title"/>
+			</editorArea:basic-search>
+		</context>
+	</context>
 
 	<context merge-by="module" component="editorareaactions" type="Consignment">
 		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
