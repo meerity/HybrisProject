@@ -19,18 +19,19 @@ public class ImpexImportService implements ImportService {
      * Imports ImpEx files from specified folder
      *
      * @param path path to folder with files to import
+     * @return if import was successful or not
      */
     @Override
-    public void importData(String path) {
+    public boolean importData(String path) {
         File folder = new File(path);
         if (!folder.exists() || !folder.isDirectory()) {
             LOG.error("Invalid path. Folder does not exist or it is not a folder: " + path);
-            return;
+            return false;
         }
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".impex"));
         if (files == null || files.length == 0) {
             LOG.error("Folder does not contain .impex files: " + path);
-            return;
+            return false;
         }
         LOG.info("Starting import");
         for (File file : files) {
@@ -50,5 +51,6 @@ public class ImpexImportService implements ImportService {
             }
 
         }
+        return true;
     }
 }

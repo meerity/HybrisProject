@@ -66,5 +66,15 @@
         <property name="interceptor" ref="productCouponsRemoveInterceptor"/>
         <property name="typeCode" value="Product"/>
     </bean>
+
+    <!--CronJobs task-->
+    <bean id="directoryImpexImportJob" class="com.epam.training.jobs.DirectoryImpexImportJob">
+        <property name="flexibleSearchService" ref="defaultFlexibleSearchService"/>
+        <property name="modelService" ref="defaultModelService"/>
+        <property name="sessionService" ref="defaultSessionService"/>
+
+        <property name="importService" ref="impexImportService"/>
+        <property name="impexDirectory" value="${import.directory}"/>
+    </bean>
 			
 </beans>
