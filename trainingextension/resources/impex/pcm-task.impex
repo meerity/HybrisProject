@@ -1,0 +1,29 @@
+#  SETUP
+$lang=en
+
+# Catalog creation
+INSERT_UPDATE Catalog; id[unique=true]
+                     ;productCatalog
+
+# Catalog version creation
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active
+                            ;productCatalog;Staged;true
+                            ;productCatalog;Online;true
+
+# Supplier objects creation
+INSERT_UPDATE Supplier; code[unique=true]; name[lang=en]; description[lang=en]; catalogVersion(catalog(id),version)[unique=true]
+                      ;supplier1;"Supplier 1";"Description for Supplier 1";productCatalog:Staged
+                      ;supplier2;"Supplier 2";"Description for Supplier 2";productCatalog:Staged
+                      ;supplier3;"Supplier 3";"Description for Supplier 3";productCatalog:Staged
+
+INSERT_UPDATE Product; code[unique=true]; name[lang=en]; description[lang=en]; catalogVersion(catalog(id),version)[unique=true]
+;product1;"prodc 1";"Description for  1";productCatalog:Staged
+#  SYNCRONIZATION
+
+# Creating basic sync job for productCatalog
+INSERT_UPDATE CatalogVersionSyncJob; code[unique=true]; sourceVersion(catalog(id),version); targetVersion(catalog(id),version)
+                                   ;sync-productCatalog-staged-online;productCatalog:Staged;productCatalog:Online
+
+# Creating CatalogVersionSyncCronJob
+INSERT_UPDATE CatalogVersionSyncCronJob; code; job(code)[unique=true]; sessionLanguage(isocode)
+                                       ;sync-productCatalog-staged-online-cronJob;sync-productCatalog-staged-online;en
