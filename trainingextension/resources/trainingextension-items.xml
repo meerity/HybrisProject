@@ -44,7 +44,6 @@
 		</relation>
 
 		<!--Events and Interceptors task 2-->
-
 		<relation code="ProductAndCoupons" localized="false">
 			<sourceElement type="Product" qualifier="product" cardinality="one">
 				<modifiers read="true" write="true" search="true" optional="true"/>
@@ -53,7 +52,13 @@
 				<modifiers read="true" write="true" search="true" optional="true"/>
 			</targetElement>
 		</relation>
-		
+
+		<!--Backoffice task-->
+		<relation code="AuthorsAndBooks" localized="false">
+			<deployment table="Authors_Books" typecode="11013"/>
+			<sourceElement type="Author" qualifier="author" cardinality="many"/>
+			<targetElement type="Book" qualifier="book" cardinality="many"/>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -236,6 +241,39 @@
 			<deployment table="Coupons" typecode="11012"/>
 			<attributes>
 				<attribute qualifier="info" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Backoffice task-->
+		<itemtype code="Author">
+			<deployment table="Authors" typecode="11014"/>
+			<attributes>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="birthDate" type="java.util.Date">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Book">
+			<deployment table="Books" typecode="11015"/>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="cover" type="Media">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="content" type="Media">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="year" type="java.lang.Integer">
 					<persistence type="property"/>
 				</attribute>
 			</attributes>
