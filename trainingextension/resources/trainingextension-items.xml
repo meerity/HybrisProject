@@ -282,5 +282,14 @@
 		<!--PCM task 1 (name and description attributes are already declared in Product type)-->
 		<itemtype code="Supplier" extends="Product"/>
 
+		<!--ProcessEngine task 2-->
+		<itemtype code="AddressDefaultProcess" extends="BusinessProcess">
+			<attributes>
+				<attribute qualifier="address" type="Address">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
 	</itemtypes>
 </items>

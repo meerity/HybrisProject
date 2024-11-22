@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" name="SendEmailProcess" start="sendEmailAction">
+    
+    <contextParameter name="email" type="java.lang.String" use="required"/>
+
+    <action id="sendEmailAction" bean="sendEmailAction">
+        <transition name="OK" to="success"/>
+        <transition name="NOK" to="error"/>
+    </action>
+    <end id="success" state="SUCCEEDED">Everything fine</end>
+    <end id="error" state="ERROR">Some error occurred</end>
+</process>

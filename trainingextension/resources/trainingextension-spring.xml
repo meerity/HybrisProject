@@ -55,14 +55,14 @@
         <property name="modelService" ref="defaultModelService"/>
     </bean>
 
-    <bean id="ProductInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+    <bean id="productRatingInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <!--Events and Interceptors task 1-->
         <property name="interceptor" ref="productRatingValidateInterceptor"/>
         <property name="typeCode" value="Product"/>
     </bean>
 
     <!--Events and Interceptors task 2-->
-    <bean id="ProductCouponsRemoveInterceptor" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+    <bean id="productCouponsRemoveInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="productCouponsRemoveInterceptor"/>
         <property name="typeCode" value="Product"/>
     </bean>
@@ -76,5 +76,36 @@
         <property name="importService" ref="impexImportService"/>
         <property name="impexDirectory" value="${import.directory}"/>
     </bean>
-			
+
+    <!--ProcessEngine task 1-->
+    <bean id="stubRegistrationService" class="com.epam.training.service.impl.StubRegistrationService">
+        <property name="modelService" ref="defaultModelService"/>
+        <property name="businessProcessService" ref="defaultBusinessProcessService"/>
+    </bean>
+
+    <bean id="senEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/processes/send-email-process-definition.xml"/>
+    </bean>
+
+    <bean id="sendEmailAction" class="com.epam.training.actions.sendemail.SendEmailAction" parent="abstractAction"/>
+
+    <!--ProcessEngine task 2-->
+    <bean id="addressAfterSaveListener" class="com.epam.training.listeners.AddressAfterSaveListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+        <property name="tenantService" ref="defaultTenantService"/>
+        <property name="clusterService" ref="defaultClusterService"/>
+    </bean>
+
+    <bean id="addressDefaultDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/processes/default-address-process-definition.xml"/>
+    </bean>
+
+    <bean id="checkAddressTypeAction" class="com.epam.training.actions.defaultaddress.CheckAddressTypeAction"/>
+    <bean id="billingAddressAction" class="com.epam.training.actions.defaultaddress.SetDefaultBillingAddressAction">
+        <property name="modelService" ref="defaultModelService"/>
+    </bean>
+    <bean id="shipmentAddressAction" class="com.epam.training.actions.defaultaddress.SetDefaultShipmentAddressAction">
+        <property name="modelService" ref="defaultModelService"/>
+    </bean>
+
 </beans>
