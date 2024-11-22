@@ -279,5 +279,8 @@
 			</attributes>
 		</itemtype>
 
+		<!--PCM task 1 (name and description attributes are already declared in Product type)-->
+		<itemtype code="Supplier" extends="Product"/>
+
 	</itemtypes>
 </items>
