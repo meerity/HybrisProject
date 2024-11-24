@@ -1,0 +1,7 @@
+#  Constraint check
+INSERT_UPDATE Supplier; code[unique=true]; name[lang=en]; description[lang=en]; catalogVersion(catalog(id),version)[unique=true]
+                      ;supplier1;"Supplier 1";"Description ";productCatalog:Staged          # valid
+                      ;supplier2;"Supplier 2";"Description for Supplkkkkkkkkkkkkier 2";productCatalog:Staged            # invalid
+                      ;supplier3;"Supplier 3";"Description for Supplkkkkkkiedagdgfsgr 3";productCatalog:Staged          # invalid
+
+

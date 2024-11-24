@@ -1,0 +1,9 @@
+#  Constraint creation
+INSERT_UPDATE SizeConstraint;id[unique=true];severity(code,itemtype(code));active;annotation;descriptor(enclosingType(code),qualifier);message[lang=en];min;max
+                            ;UidSizeConstraint;ERROR:Severity;true;javax.validation.constraints.Size;User:uid;Uid must be from 4 to 32 characters long;4;32
+
+#  Constraint check after constraint engine reload
+INSERT_UPDATE User;uid[unique=true];name;description
+                      ;test1;Test User;Test description     # valid (4 chars)
+                      ;usr;Test User;Test description       # invalid (3 chars)
+                      ;verylongusernamewithtoomanycharacterstest;Test User;Test description    # invalid (>32 chars)
