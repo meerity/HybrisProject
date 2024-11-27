@@ -59,6 +59,13 @@
 			<sourceElement type="Author" qualifier="author" cardinality="many"/>
 			<targetElement type="Book" qualifier="book" cardinality="many"/>
 		</relation>
+
+		<!--Transactions task-->
+		<relation code="PlayersAndMatches" localized="false">
+			<deployment table="Players_Matches" typecode="11017"/>
+			<sourceElement type="Player" qualifier="players" cardinality="many"/>
+			<targetElement type="Match" qualifier="matches" cardinality="many"/>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -315,6 +322,24 @@
 					<defaultvalue>
 						com.epam.training.constraints.annotations.LengthByProperty.class
 					</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<!--Transactions task-->
+		<itemtype code="Player" extends="Customer">
+			<attributes>
+				<attribute qualifier="playerCode" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Match">
+			<deployment table="Matches" typecode="11016"/>
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
 				</attribute>
 			</attributes>
 		</itemtype>
