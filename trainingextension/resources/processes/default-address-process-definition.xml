@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition"
+         processClass="com.epam.training.model.AddressDefaultProcessModel" name="AddressDefaultProcess" start="checkAddressTypeAction">
+
+    <action id="checkAddressTypeAction" bean="checkAddressTypeAction">
+        <transition name="BILLING" to="billingAddressAction"/>
+        <transition name="SHIPMENT" to="shipmentAddressAction"/>
+        <transition name="ERROR" to="error"/>
+    </action>
+    
+    <action id="billingAddressAction" bean="billingAddressAction">
+        <transition name="OK" to="success"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="shipmentAddressAction" bean="shipmentAddressAction">
+        <transition name="OK" to="success"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <end id="success" state="SUCCEEDED">Everything fine</end>
+    <end id="error" state="ERROR">Some error occurred</end>
+
+</process>
