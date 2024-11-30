@@ -80,3 +80,7 @@ rebel.xml
 RemoteSystemsTempFiles/
 .lastupdate
 platformhome.properties
+
+
+*_bof.jar
+classes/
