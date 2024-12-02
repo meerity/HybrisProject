@@ -1,0 +1,12 @@
+#   Creating MediaContainer
+$catalogVersion=catalogVersion(catalog(id),version)
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];name[lang=en];$catalogVersion
+                            ;test-container;Test Container;Default:Staged
+
+#   Creating medias
+INSERT_UPDATE Media;code[unique=true];$catalogVersion;removable;mediaFormat(qualifier);mediaContainer(qualifier)
+                   ;test_media_1;Default:Staged;true;desktop;test-container
+                   ;test_media_2;Default:Staged;true;mobile;test-container
+                   ;test_media_3;Default:Staged;true;65Wx65H;test-container
+                   ;test_media_4;Default:Staged;true;30Wx30H;test-container
