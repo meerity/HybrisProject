@@ -38,15 +38,17 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
         address.setTown("Test Town");
         address.setBillingAddress(billing);
         address.setShippingAddress(shipping);
+
+        modelService.save(customer);
         modelService.save(address);
         return address;
     }
 
-    private void waitForAddressProcessing(AddressModel address) throws InterruptedException {
-        // Даем время на запуск процесса
-        Thread.sleep(1000);
+    private void waitForAddressProcessing() throws InterruptedException {
 
-        // Обновляем модель customer
+        Thread.sleep(2000);
+
+
         modelService.refresh(customer);
     }
 
@@ -56,7 +58,9 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
         AddressModel address = createAndSaveAddress(true, false);
 
         // when
-        waitForAddressProcessing(address);
+        waitForAddressProcessing();
+
+
 
         // then
         assertEquals("Should set billing address as default",
@@ -69,7 +73,7 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
         AddressModel address = createAndSaveAddress(false, true);
 
         // when
-        waitForAddressProcessing(address);
+        waitForAddressProcessing();
 
         // then
         assertEquals("Should set shipment address as default",
@@ -82,7 +86,7 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
         AddressModel address = createAndSaveAddress(true, true);
 
         // when
-        waitForAddressProcessing(address);
+        waitForAddressProcessing();
 
         // then
         assertEquals("Should set billing address as default",
@@ -94,10 +98,10 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
     @Test
     public void shouldNotChangeAddressWhenNotBillingOrShipping() throws InterruptedException {
         // given
-        AddressModel address = createAndSaveAddress(false, false);
+        createAndSaveAddress(false, false);
 
         // when
-        waitForAddressProcessing(address);
+        waitForAddressProcessing();
 
         // then
         assertNull("Should not set default payment address",
@@ -109,12 +113,12 @@ public class DefaultAddressProcessIntegrationTest extends ServicelayerTransactio
     @Test
     public void shouldUpdateDefaultAddress() throws InterruptedException {
         // given
-        AddressModel firstAddress = createAndSaveAddress(true, false);
-        waitForAddressProcessing(firstAddress);
+        createAndSaveAddress(true, false);
+        waitForAddressProcessing();
 
         // when
         AddressModel secondAddress = createAndSaveAddress(true, false);
-        waitForAddressProcessing(secondAddress);
+        waitForAddressProcessing();
 
         // then
         assertEquals("Should update default payment address",
