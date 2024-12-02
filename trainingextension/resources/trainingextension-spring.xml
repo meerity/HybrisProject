@@ -116,4 +116,17 @@
         <property name="modelService" ref="defaultModelService"/>
     </bean>
 
+    <!--Cache task 1-->
+    <bean name="playerAndMatchCacheRegion" class="de.hybris.platform.regioncache.region.impl.EHCacheRegion">
+        <constructor-arg name="name" value="playerAndMatchCacheRegion"/>
+        <constructor-arg name="maxEntries" value="20000"/>
+        <constructor-arg name="evictionPolicy" value="LFU"/>
+        <property name="handledTypes">
+            <array>
+                <value>4</value>
+                <value>11016</value>
+            </array>
+        </property>
+    </bean>
+
 </beans>
