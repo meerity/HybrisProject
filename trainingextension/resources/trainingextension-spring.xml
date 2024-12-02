@@ -111,4 +111,9 @@
     <!--Data Validation task 7-->
     <bean id="lengthByPropertyValidator" class="com.epam.training.constraints.validators.LengthByPropertyValidator"/>
 
+    <!--Transactions task-->
+    <bean id="playerAndMatchService" class="com.epam.training.service.impl.PlayerAndMatchService">
+        <property name="modelService" ref="defaultModelService"/>
+    </bean>
+
 </beans>
