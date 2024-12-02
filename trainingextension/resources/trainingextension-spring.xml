@@ -90,10 +90,10 @@
     <bean id="sendEmailAction" class="com.epam.training.actions.sendemail.SendEmailAction" parent="abstractAction"/>
 
     <!--ProcessEngine task 2-->
-    <bean id="addressAfterSaveListener" class="com.epam.training.listeners.AddressAfterSaveListener">
+    <bean id="addressAfterSaveListener" class="com.epam.training.listeners.AddressAfterSaveListener"
+    parent="abstractEventListener">
         <property name="businessProcessService" ref="businessProcessService"/>
-        <property name="tenantService" ref="defaultTenantService"/>
-        <property name="clusterService" ref="defaultClusterService"/>
+        <property name="modelService" ref="defaultModelService"/>
     </bean>
 
     <bean id="addressDefaultDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
