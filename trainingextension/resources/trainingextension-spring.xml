@@ -108,4 +108,7 @@
         <property name="modelService" ref="defaultModelService"/>
     </bean>
 
+    <!--Data Validation task 7-->
+    <bean id="lengthByPropertyValidator" class="com.epam.training.constraints.validators.LengthByPropertyValidator"/>
+
 </beans>

@@ -291,5 +291,32 @@
 			</attributes>
 		</itemtype>
 
+		<!--Data Validation task 1-->
+		<itemtype code="Customer" autocreate="false">
+			<attributes>
+				<attribute qualifier="age" type="java.lang.Integer">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!--Data Validation task 7-->
+		<itemtype code="LengthByPropertyConstraint" extends="AttributeConstraint">
+			<description>Custom constraint that sets a max string length by the value in local.properties</description>
+			<attributes>
+				<attribute qualifier="value" type="java.lang.Integer">
+					<description>Value from property file</description>
+					<modifiers read="true" write="true" search="true" optional="false"
+							   initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="annotation" type="java.lang.Class" redeclare="true">
+					<modifiers write="false" initial="true" optional="false"/>
+					<defaultvalue>
+						com.epam.training.constraints.annotations.LengthByProperty.class
+					</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
 	</itemtypes>
 </items>

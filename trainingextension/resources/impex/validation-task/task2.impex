@@ -1,0 +1,9 @@
+#  Constraint creation
+INSERT_UPDATE MinConstraint;id[unique=true];severity(code,itemtype(code));active;annotation;descriptor(enclosingType(code),qualifier);message[lang=en];value
+                           ;MinAgeConstraint;ERROR:Severity;true;javax.validation.constraints.Min;Customer:age;Registration only from 18 yeras old;18
+
+#  Constraint check after constraint engine reload
+INSERT_UPDATE Customer;uid[unique=true];name;age
+                      ;test1;Test Customer;18    # valid (18 years old)
+                      ;customer1;Test Customer2;5       # invalid (5 years old)
+

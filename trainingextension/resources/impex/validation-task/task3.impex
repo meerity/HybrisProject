@@ -1,0 +1,13 @@
+# Created Constraint in Backoffice via Constraint creation wizard
+
+#  Constraint check after constraint engine reload
+$catalog=Default
+$catalogversion=Staged
+$approvalStatus=check
+
+# Тестовые продукты
+INSERT_UPDATE Product;code[unique=true];name[lang=en];catalogVersion(catalog(id),version);approvalStatus(code);offlineDate[dateformat=dd.MM.yyyy HH:mm:ss]
+                     ;test1;Test Product 1;$catalog:$catalogversion;check;31.12.2025 23:59:59    # valid (future date)
+                     ;test2;Test Product 2;$catalog:$catalogversion;$approvalStatus;01.01.2023 00:00:00    # invalid (past date)
+
+
