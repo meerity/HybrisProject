@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><project name="trainingsmartedit_buildcallbacks">
+        
+    <patternset id="extension.trainingsmartedit.binary.filter">
+                
+        <patternset refid="extension.binary.filter"/>
+                
+        <exclude name="build/"/>
+                
+        <exclude name="**/node_modules/"/>
+                
+        <exclude name="jsTarget/"/>
+                
+        <exclude name="apps/**/.angular/"/>
+                
+        <exclude name="apps/**/.rush/"/>
+                
+        <exclude name="apps/**/.temp/"/>
+                
+        <exclude name="apps/**/junit/"/>
+            
+    </patternset>
+        
+    <patternset id="extension.trainingsmartedit.source.filter">
+                
+        <patternset refid="extension.source.filter"/>
+                
+        <exclude name="build/"/>
+                
+        <exclude name="**/node_modules/"/>
+                
+        <exclude name="jsTarget/"/>
+                
+        <exclude name="apps/**/.angular/"/>
+                
+        <exclude name="apps/**/.rush/"/>
+                
+        <exclude name="apps/**/.temp/"/>
+                
+        <exclude name="apps/**/junit/"/>
+            
+    </patternset>
+        
+    <patternset id="extension.trainingsmartedit.production.filter">
+                
+        <patternset refid="extension.production.filter"/>
+                
+        <exclude name="build/"/>
+                
+        <exclude name="**/node_modules/"/>
+                
+        <exclude name="jsTarget/"/>
+                
+        <exclude name="apps/**/.angular/"/>
+                
+        <exclude name="apps/**/.rush/"/>
+                
+        <exclude name="apps/**/.temp/"/>
+                
+        <exclude name="apps/**/junit/"/>
+            
+    </patternset>
+        
+
+    
+    <macrodef name="trainingsmartedit_before_build">
+                
+        <sequential>
+                        
+            <build_smartedit_extension appNames="trainingsmarteditcommons,trainingsmarteditContainer,trainingsmartedit" extensionName="trainingsmartedit"/>
+                    
+        </sequential>
+            
+    </macrodef>
+        
+    <!-- Please find details in https://cxjira.sap.com/browse/CMSX-10210
+   that why we can use 'web' property to ensure our frontend UT only execute once in team & commerce-suite pipeline -->
+        
+    <macrodef name="trainingsmartedit_before_yunit">
+                
+        <sequential>
+                        
+            <if>
+                                
+                <istrue value="${testclasses.web}"/>
+                                
+                <then>
+                                        
+                    <test_smartedit_extension appNames="trainingsmarteditcommons,trainingsmarteditContainer,trainingsmartedit" extensionName="trainingsmartedit"/>
+                                    
+                </then>
+                            
+            </if>
+                    
+        </sequential>
+            
+    </macrodef>
+        
+    <!--
+        How-to run unit tests in the extension:
+        1- Execute the command "ant allwebtests" within "platform" folder (will execute tests for ALL extensions).
+        2- OR Execute the command "npm run test" or "npm run test:dev" in each apps/*/* folder individually.
+        3- OR Execute the command "ant test_trainingsmartedit"
+    -->
+        
+    <target name="test_trainingsmartedit">
+                
+        <test_smartedit_extension appNames="trainingsmarteditcommons,trainingsmarteditContainer,trainingsmartedit" extensionName="trainingsmartedit"/>
+            
+    </target>
+    
+</project>
