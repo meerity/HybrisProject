@@ -11,5 +11,8 @@
         <extension name="trainingfacades" />
         <extension name="trainingtest" />
         <extension name="trainingstorefront" />
+        <extension name="uppercasenames" />
+        <extension name="solrfacetsearch" />
+		<extension name="solrserver" />
 	</extensions>
 </hybrisconfig>
