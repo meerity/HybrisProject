@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+           
+    
+    <extension abstractclassprefix="Generated" classprefix="Trainingsmartedit" managername="TrainingsmarteditManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="trainingsmartedit">
+                      
+        
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                      
+        
+        <requires-extension name="smartedittools"/>
+        <requires-extension name="cms2"/>
+                      
+        
+        <requires-extension name="smartedit"/>
+                      
+        
+        <coremodule generated="true" manager="com.epam.training.jalo.TrainingsmarteditManager" packageroot="com.epam.training"/>
+                       
+        
+        <webmodule jspcompile="false" webroot="/trainingsmartedit"/>
+                       
+        
+           
+    
+    </extension>
+              
+
+
+</extensioninfo>
