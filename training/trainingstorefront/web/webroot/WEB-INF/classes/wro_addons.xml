@@ -4,6 +4,11 @@
    <group name="addons_responsive">
       <js>/_ui/addons/uppercasenames/responsive/common/js/uppercasenames.js</js>
       <css>/_ui/addons/uppercasenames/responsive/common/css/uppercasenames.css</css>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/webApplicationInjector.js</js>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/reprocessPage.js</js>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/adjustComponentRenderingToSE.js</js>
+      <js>/_ui/addons/smarteditaddon/responsive/common/js/smarteditaddon.js</js>
+      <css>/_ui/addons/smarteditaddon/responsive/common/css/smarteditaddon.css</css>
    </group>
 </groups>
 

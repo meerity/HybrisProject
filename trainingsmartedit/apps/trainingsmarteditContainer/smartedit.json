@@ -1,0 +1,8 @@
+{
+    "name": "trainingsmarteditcontainer",
+    "extension": {
+        "type": "container",
+        "angularApp": "trainingsmarteditContainer",
+        "seEntryModule": "TrainingsmarteditContainerModule"
+    }
+}
