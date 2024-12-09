@@ -1,0 +1,8 @@
+{
+    "name": "trainingsmartedit",
+    "extension": {
+        "type": "inner",
+        "angularApp": "trainingsmartedit",
+        "seEntryModule": "TrainingsmarteditModule"
+    }
+}

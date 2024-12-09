@@ -2,38 +2,80 @@
 <!--
  Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
-                
+                                
+    
+    
+    
+    
     
     
     <extension abstractclassprefix="Generated" classprefix="TrainingStorefront" name="trainingstorefront" usemaven="false">
-                                
+                                                                
         
+        
+        
+        
+        
+        
+        
+        <requires-extension name="smarteditaddon"/>
+        <requires-extension name="multicountrysampledataaddon"/>
+                
+                
         
         <requires-extension name="uppercasenames"/>
+                                        
+        
+        
+        
         <requires-extension name="acceleratorstorefrontcommons"/>
-                                
+                                                                
+        
+        
+        
+        
         
         
         <requires-extension name="trainingfacades"/>
-                                
+                                                                
+        
+        
+        
+        
         
         
         <webmodule jspcompile="false" webroot="/trainingstorefront"/>
-                                
+                                                                
         
                 
         
         
+        
+        
+        
+        
         <meta key="extgen-template-extension" value="true"/>
-                                
+                                                                
+        
+        
+        
+        
         
         
         <meta key="deprecated" value="true"/>
-                            
+                                                            
+    
+    
+    
+    
     
     
     </extension>
-            
+                            
+
+
+
+
 
 
 </extensioninfo>
