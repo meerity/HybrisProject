@@ -1,10 +1,14 @@
 package com.epam.training.controllers;
 
 import com.epam.training.core.v2.controller.BaseCommerceController;
-import com.epam.training.core.v2.helper.OrdersHelper;
+import de.hybris.platform.commercefacades.order.data.OrderHistoriesData;
+import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commerceservices.request.mapping.annotation.RequestMappingOverride;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryListWsDTO;
 import de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO;
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.webservicescommons.cache.CacheControl;
 import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
 import de.hybris.platform.webservicescommons.swagger.ApiBaseSiteIdAndUserIdParam;
@@ -12,14 +16,20 @@ import de.hybris.platform.webservicescommons.swagger.ApiFieldsParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import de.hybris.platform.commercefacades.order.OrderFacade;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static com.epam.training.core.constants.YcommercewebservicesConstants.ENUM_VALUES_SEPARATOR;
 
 
 @Controller
@@ -27,8 +37,8 @@ import java.util.List;
 @Tag(name = "Orders")
 public class OverridedOrdersController extends BaseCommerceController {
 
-    @Resource(name = "ordersHelper")
-    private OrdersHelper ordersHelper;
+    @Resource(name = "orderFacade")
+    private OrderFacade orderFacade;
 
     @Secured({ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
     @CacheControl(directive = CacheControlDirective.PRIVATE)
@@ -55,11 +65,71 @@ public class OverridedOrdersController extends BaseCommerceController {
     {
         validateStatusesEnumValue(statuses);
 
-        final OrderHistoryListWsDTO orderHistoryList = ordersHelper.searchOrderHistory(statuses, currentPage, pageSize, sort,
+        final OrderHistoryListWsDTO orderHistoryList = searchOrderHistory(statuses, currentPage, pageSize, sort,
                 addPaginationField(fields));
 
         setTotalCountHeader(response, orderHistoryList.getPagination());
 
         return getDataMapper().mapAsList(orderHistoryList.getOrders(), OrderWsDTO.class, fields);
+    }
+
+    @Cacheable(value = "orderCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(true,true,'DTO',#statuses,#currentPage,#pageSize,#sort,#fields)")
+    public OrderHistoryListWsDTO searchOrderHistory(final String statuses, final int currentPage, final int pageSize,
+                                                    final String sort, final String fields)
+    {
+        final OrderHistoriesData orderHistoriesData = searchOrderHistory(statuses, currentPage, pageSize, sort);
+        return getDataMapper().map(orderHistoriesData, OrderHistoryListWsDTO.class, fields);
+    }
+
+    @Cacheable(value = "orderCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(true,true,'Data',#statuses,#currentPage,#pageSize,#sort)")
+    public OrderHistoriesData searchOrderHistory(final String statuses, final int currentPage, final int pageSize,
+                                                 final String sort)
+    {
+        final PageableData pageableData = createPageableData(currentPage, pageSize, sort);
+
+        final OrderHistoriesData orderHistoriesData;
+        if (statuses != null)
+        {
+            final Set<OrderStatus> statusSet = extractOrderStatuses(statuses);
+            orderHistoriesData = createOrderHistoriesData(
+                    orderFacade.getPagedOrderHistoryForStatuses(pageableData, statusSet.toArray(new OrderStatus[statusSet.size()])));
+        }
+        else
+        {
+            orderHistoriesData = createOrderHistoriesData(orderFacade.getPagedOrderHistoryForStatuses(pageableData));
+        }
+        return orderHistoriesData;
+    }
+
+    protected Set<OrderStatus> extractOrderStatuses(final String statuses)
+    {
+        final String[] statusesStrings = statuses.split(ENUM_VALUES_SEPARATOR);
+
+        final Set<OrderStatus> statusesEnum = new HashSet<>();
+        for (final String status : statusesStrings)
+        {
+            statusesEnum.add(OrderStatus.valueOf(status));
+        }
+        return statusesEnum;
+    }
+
+    protected OrderHistoriesData createOrderHistoriesData(final SearchPageData<OrderHistoryData> result)
+    {
+        final OrderHistoriesData orderHistoriesData = new OrderHistoriesData();
+
+        orderHistoriesData.setOrders(result.getResults());
+        orderHistoriesData.setSorts(result.getSorts());
+        orderHistoriesData.setPagination(result.getPagination());
+
+        return orderHistoriesData;
+    }
+
+    protected PageableData createPageableData(final int currentPage, final int pageSize, final String sort)
+    {
+        final PageableData pageable = new PageableData();
+        pageable.setCurrentPage(currentPage);
+        pageable.setPageSize(pageSize);
+        pageable.setSort(sort);
+        return pageable;
     }
 }
