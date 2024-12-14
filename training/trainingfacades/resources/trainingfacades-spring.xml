@@ -182,4 +182,15 @@
 	</bean>
 
 	<bean id="genderData" class="com.epam.training.facades.product.data.GenderData" scope="prototype"/>
+
+	<bean id="defaultOrderCancellationFacade" class="com.epam.training.facades.DefaultOrderCancellationFacade" parent="defaultOrderFacade">
+		<property name="userService" ref="userService"/>
+		<property name="orderConverter" ref="orderConverter"/>
+		<property name="orderHistoryConverter" ref="orderHistoryConverter"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
+		<property name="commerceOrderService" ref="commerceOrderService"/>
+		<property name="defaultOrderCancellationService" ref="defaultOrderCancellationService"/>
+	</bean>
 </beans>

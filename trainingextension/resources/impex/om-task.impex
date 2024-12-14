@@ -1,0 +1,7 @@
+INSERT_UPDATE Order; code[unique=true]; user(uid); status(codeLowerCase);date;currency(isocode);site(uid)
+                   ;order1;antonychev10@gmail.com;created;10.10.2010 5:45:23;USD;electronics
+                   ;order2;antonychev10@gmail.com;created;10.10.2010 5:45:23;USD;electronics
+                   ;order3;antonychev10@gmail.com;created;10.10.2010 5:45:23;USD;electronics
+                   ;order4;antonychev10@gmail.com;created;10.10.2010 5:45:23;USD;electronics
+
+
