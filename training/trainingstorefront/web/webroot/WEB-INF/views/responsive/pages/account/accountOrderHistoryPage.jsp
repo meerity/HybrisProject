@@ -70,3 +70,21 @@
 		</div>
 	</div>
 </c:if>
+<div>
+	<c:if test="${not empty successMessage}">
+		<div class="alert alert-success">
+				${successMessage}
+		</div>
+	</c:if>
+	<c:if test="${not empty errorMessage}">
+		<div class="alert alert-danger">
+				${errorMessage}
+		</div>
+	</c:if>
+</div>
+<form action="${contextPath}/my-account/orders/cancel-all" method="POST">
+	<button type="submit" class="btn btn-primary">
+		<spring:theme code="text.account.orderHistory.cancelAllOrders"/>
+	</button>
+	<input type="hidden" name="CSRFToken" value="${CSRFToken.getToken()}">
+</form>

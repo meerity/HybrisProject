@@ -3,6 +3,7 @@
  */
 package com.epam.training.storefront.controllers.pages;
 
+import com.epam.training.facades.DefaultOrderCancellationFacade;
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -152,6 +153,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "orderFacade")
 	private OrderFacade orderFacade;
+
+	@Resource(name = "defaultOrderCancellationFacade")
+	private DefaultOrderCancellationFacade defaultOrderCancellationFacade;
 
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
@@ -315,6 +319,21 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.orderHistory"));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/orders/cancel-all", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String cancelAllOrders(final Model model, RedirectAttributes redirectAttributes)
+	{
+		try {
+			defaultOrderCancellationFacade.cancelAllUnshippedOrders();
+			redirectAttributes.addFlashAttribute("successMessage",
+					getMessageSource().getMessage("text.account.orderHistory.cancelAll.success", null, getI18nService().getCurrentLocale()));
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("errorMessage",
+					getMessageSource().getMessage("text.account.orderHistory.cancelAll.error", null, getI18nService().getCurrentLocale()));
+		}
+		return REDIRECT_TO_ORDER_HISTORY_PAGE;
 	}
 
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)

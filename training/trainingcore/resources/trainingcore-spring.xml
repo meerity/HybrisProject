@@ -538,4 +538,20 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+	
+	<!--New Order Service-->
+	<bean id="defaultOrderCancellationService" class="com.epam.training.core.services.DefaultOrderCancellationService" parent="defaultOrderService">
+		<property name="modelService" ref="defaultModelService"/>
+		<property name="userService" ref="defaultUserService"/>
+		<property name="baseStoreService" ref="defaultBaseStoreService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="createOrderFromCartStrategy" ref="defaultCreateOrderFromCartStrategy"/>
+		<property name="abstractOrderEntryTypeService" ref="defaultAbstractOrderEntryTypeService"/>
+		<property name="orderDao" ref="defaultOrderDao"/>
+		<property name="cloneAbstractOrderStrategy" ref="defaultCloneAbstractOrderStrategy"/>
+		<property name="txManager" ref="txManager"/>
+		<property name="saveAbstractOrderStrategy" ref="defaultSaveAbstractOrderStrategy"/>
+		<property name="abstractOrderEntryService" ref="defaultAbstractOrderEntryService"/>
+		<property name="sessionService" ref="defaultSessionService"/>
+	</bean>
 </beans>
