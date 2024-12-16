@@ -1,0 +1,38 @@
+#   Groups and Customers
+INSERT_UPDATE UserDiscountGroup;code[unique=true];name
+                               ;DiscountGroup_1;First Discount Group
+                               ;DiscountGroup_2;Second Discount Group
+
+INSERT_UPDATE UserTaxGroup;code[unique=true];name
+                          ;TaxGroup_1;First Tax Group
+                          ;TaxGroup_2;Second Tax Group
+
+INSERT_UPDATE UserGroup;uid[unique=true];name;userDiscountGroup(code);userTaxGroup(code)
+                       ;UserPriceGroup_1;First Price Group;DiscountGroup_1;TaxGroup_1
+                       ;UserPriceGroup_2;Second Price Group;DiscountGroup_2;TaxGroup_2
+
+INSERT_UPDATE Customer;uid[unique=true];name
+                      ;user_1;User
+
+#   Discounts and taxes
+INSERT_UPDATE Discount;code[unique=true];name[lang=en];value
+                      ;DISCOUNT_10;10% Discount;10
+                      ;DISCOUNT_20;20% Discount;20
+                      ;DISCOUNT_30;30% Discount;30
+
+INSERT_UPDATE Tax;code[unique=true];name[lang=en];value
+                 ;TAX_20;20% Tax;20
+                 ;TAX_10;10% Tax;10
+                 ;TAX_25;25% Tax;25
+
+
+#   Rows
+INSERT_UPDATE DiscountRow;ug(code)[unique=true];user(uid);discount(code)
+                      ;DiscountGroup_1;;DISCOUNT_10
+                      ;DiscountGroup_2;;DISCOUNT_20
+                      ;;user_1;DISCOUNT_30
+
+INSERT_UPDATE TaxRow;ug(code)[unique=true];tax(code)
+                    ;TaxGroup_1;TAX_20
+                    ;TaxGroup_2;TAX_10
+                    ;;TAX_25
